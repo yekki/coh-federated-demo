@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+
+<cache-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.oracle.com/coherence/coherence-cache-config"
+	xsi:schemaLocation="http://xmlns.oracle.com/coherence/coherence-cache-config coherence-cache-config.xsd">
+
+	<defaults>
+		<serializer>
+			<instance>
+				<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+				<init-params>
+					<init-param>
+						<param-type>String</param-type>
+						<param-value>demo-pof-config.xml</param-value>
+					</init-param>
+				</init-params>
+			</instance>
+		</serializer>
+	</defaults>
+
+	<caching-scheme-mapping>
+		<cache-mapping>
+			<cache-name>Employee</cache-name>
+			<scheme-name>federated-scheme</scheme-name>
+			<key-type>java.lang.String</key-type>
+			<value-type>com.oracle.poc.coherence.model.Employee</value-type>
+		</cache-mapping>
+	</caching-scheme-mapping>
+
+	<caching-schemes>
+		<federated-scheme>
+			<scheme-name>federated-scheme</scheme-name>
+			<service-name>FederatedPartitionedPofCache</service-name>
+			<backing-map-scheme>
+				<local-scheme>
+					<high-units>0</high-units>
+					<unit-calculator>BINARY</unit-calculator>
+				</local-scheme>
+			</backing-map-scheme>
+
+			<persistence>
+				<environment>myPersistEnv</environment>
+				<archiver>mySnapshotArchiverEnv</archiver>
+			</persistence>
+
+			<autostart>true</autostart>
+
+			<interceptors>
+				<interceptor>
+					<name>FederatedConnectionInterceptor</name>
+					<instance>
+						<class-name>com.oracle.poc.coherence.aop.FederatedConnectionInterceptor</class-name>
+					</instance>
+				</interceptor>
+				<interceptor>
+					<name>EmpConflictHandler</name>
+					<instance>
+						<class-name>com.oracle.poc.coherence.aop.EmpComittingRemoteEventsInterceptor</class-name>
+					</instance>
+				</interceptor>
+			</interceptors>
+
+			<socket-provider>mySSLConfig</socket-provider>
+
+			<topologies>
+				<topology>
+					<name>myActiveActiveTopology</name>
+				</topology>
+			</topologies>
+		</federated-scheme>
+
+		<proxy-scheme>
+			<service-name>ExtendTcpProxyService</service-name>
+			<acceptor-config>
+				<tcp-acceptor>
+					<socket-provider>mySSLConfig</socket-provider>
+					<local-address>
+						<address>127.0.0.1</address>
+						<port>29099</port>
+					</local-address>
+				</tcp-acceptor>
+			</acceptor-config>
+			<proxy-config>
+				<cache-service-proxy>
+					<enabled>true</enabled>
+				</cache-service-proxy>
+				<invocation-service-proxy>
+					<enabled>true</enabled>
+				</invocation-service-proxy>
+			</proxy-config>
+			<autostart>true</autostart>
+		</proxy-scheme>
+	</caching-schemes>
+</cache-config>

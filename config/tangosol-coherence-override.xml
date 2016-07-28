@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+
+<coherence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.oracle.com/coherence/coherence-operational-config"
+	xsi:schemaLocation="http://xmlns.oracle.com/coherence/coherence-operational-config coherence-operational-config.xsd">
+
+	<cluster-config>
+		<!-- Persistence env. definition -->
+		<persistence-environments>
+			<persistence-environment id="myPersistEnv">
+				<persistence-mode>on-demand</persistence-mode>
+				<active-directory>/Users/gniu/Workspaces/ProjectStuff/FederatedCachingDemo/persistence/active</active-directory>
+				<snapshot-directory>/Users/gniu/Workspaces/ProjectStuff/FederatedCachingDemo/persistence/snapshot</snapshot-directory>
+				<trash-directory>/Users/gniu/Workspaces/ProjectStuff/FederatedCachingDemo/persistence/trash</trash-directory>
+			</persistence-environment>
+		</persistence-environments>
+
+		<snapshot-archivers>
+			<directory-archiver id="mySnapshotArchiverEnv">
+				<archive-directory>/Users/gniu/Workspaces/ProjectStuff/FederatedCachingDemo/snapshot-archivers</archive-directory>
+			</directory-archiver>
+		</snapshot-archivers>
+
+		<!-- configuration for SSL communications between clusters -->
+		<socket-providers>
+			<socket-provider id="mySSLConfig">
+				<ssl>
+					<protocol>TLS</protocol>
+					<identity-manager>
+						<algorithm>SunX509</algorithm>
+						<key-store>
+							<url system-property="identity.manager">file:/Users/gniu/Workspaces/ProjectStuff/FederatedCachingDemo/ssl/keystore.jks</url>
+							<password>123456</password>
+							<type>JKS</type>
+						</key-store>
+						<password>123456</password>
+					</identity-manager>
+					<trust-manager>
+						<algorithm>SunX509</algorithm>
+						<key-store>
+							<url>file:/Users/gniu/Workspaces/ProjectStuff/FederatedCachingDemo/ssl/keystore.jks</url>
+							<password>123456</password>
+							<type>JKS</type>
+						</key-store>
+					</trust-manager>
+					<socket-provider>tcp</socket-provider>
+				</ssl>
+			</socket-provider>
+		</socket-providers>
+	</cluster-config>
+
+	<!-- Define a federation configuration for ClusterA and ClusterB where the 
+		default topology is Active-Active. -->
+	<federation-config>
+		<participants>
+			<participant>
+				<name>ClusterA</name>
+				<remote-addresses>
+					<socket-address>
+						<address>127.0.0.1</address>
+						<port>11100</port>
+					</socket-address>
+				</remote-addresses>
+			</participant>
+			<participant>
+				<name>ClusterB</name>
+				<remote-addresses>
+					<socket-address>
+						<address>127.0.0.1</address>
+						<port>11200</port>
+					</socket-address>
+				</remote-addresses>
+			</participant>
+		</participants>
+
+		<topology-definitions>
+			<active-passive>
+				<name>myActiveActiveTopology</name>
+				<active>ClusterA</active>
+				<active>ClusterB</active>
+			</active-passive>
+		</topology-definitions>
+	</federation-config>
+</coherence>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<cache-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.oracle.com/coherence/coherence-cache-config"
+	xsi:schemaLocation="http://xmlns.oracle.com/coherence/coherence-cache-config coherence-cache-config.xsd">
+	<defaults>
+		<serializer>
+			<instance>
+				<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+				<init-params>
+					<init-param>
+						<param-type>String</param-type>
+						<param-value>demo-pof-config.xml</param-value>
+					</init-param>
+				</init-params>
+			</instance>
+		</serializer>
+
+		<socket-provider>
+			<ssl>
+				<protocol>TLS</protocol>
+				<identity-manager>
+					<algorithm>SunX509</algorithm>
+					<key-store>
+						<url system-property="identity.manager">file:/Users/gniu/Workspaces/ProjectStuff/FederatedCachingDemo/ssl/keystore.jks</url>
+						<password>123456</password>
+						<type>JKS</type>
+					</key-store>
+					<password>123456</password>
+				</identity-manager>
+				<trust-manager>
+					<algorithm>SunX509</algorithm>
+					<key-store>
+						<url>file:/Users/gniu/Workspaces/ProjectStuff/FederatedCachingDemo/ssl/keystore.jks</url>
+						<password>123456</password>
+						<type>JKS</type>
+					</key-store>
+				</trust-manager>
+				<socket-provider>tcp</socket-provider>
+			</ssl>
+		</socket-provider>
+	</defaults>
+
+	<caching-scheme-mapping>
+		<cache-mapping>
+			<cache-name>Employee</cache-name>
+			<scheme-name>remote-scheme</scheme-name>
+			<key-type>java.lang.String</key-type>
+			<value-type>com.oracle.poc.coherence.model.Employee</value-type>
+		</cache-mapping>
+	</caching-scheme-mapping>
+
+	<caching-schemes>
+		<remote-cache-scheme>
+			<scheme-name>remote-scheme</scheme-name>
+			<service-name>RemoteProxyCacheService</service-name>
+			<initiator-config>
+				<tcp-initiator>
+					<remote-addresses>
+						<!-- ClusterA -->
+						<socket-address>
+							<address>127.0.0.1</address>
+							<port>19099</port>
+						</socket-address>
+
+						<!-- ClusterB -->
+						<socket-address>
+							<address>127.0.0.1</address>
+							<port>29099</port>
+						</socket-address>
+					</remote-addresses>
+				</tcp-initiator>
+				<outgoing-message-handler>
+					<request-timeout>10s</request-timeout>
+				</outgoing-message-handler>
+				<connect-timeout>10s</connect-timeout>
+			</initiator-config>
+		</remote-cache-scheme>
+	</caching-schemes>
+</cache-config>
