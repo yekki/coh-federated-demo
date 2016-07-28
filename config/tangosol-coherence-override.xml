@@ -9,15 +9,15 @@
 		<persistence-environments>
 			<persistence-environment id="myPersistEnv">
 				<persistence-mode>on-demand</persistence-mode>
-				<active-directory>/Users/gniu/Workspaces/ProjectStuff/FederatedCachingDemo/persistence/active</active-directory>
-				<snapshot-directory>/Users/gniu/Workspaces/ProjectStuff/FederatedCachingDemo/persistence/snapshot</snapshot-directory>
-				<trash-directory>/Users/gniu/Workspaces/ProjectStuff/FederatedCachingDemo/persistence/trash</trash-directory>
+				<active-directory>/Users/gniu/Workspaces/coh-federated-demo/persistence/active</active-directory>
+				<snapshot-directory>/Users/gniu/Workspaces/coh-federated-demo/persistence/snapshot</snapshot-directory>
+				<trash-directory>/Users/gniu/Workspaces/coh-federated-demo/persistence/trash</trash-directory>
 			</persistence-environment>
 		</persistence-environments>
 
 		<snapshot-archivers>
 			<directory-archiver id="mySnapshotArchiverEnv">
-				<archive-directory>/Users/gniu/Workspaces/ProjectStuff/FederatedCachingDemo/snapshot-archivers</archive-directory>
+				<archive-directory>/Users/gniu/Workspaces/coh-federated-demo/snapshot-archivers</archive-directory>
 			</directory-archiver>
 		</snapshot-archivers>
 
@@ -29,7 +29,7 @@
 					<identity-manager>
 						<algorithm>SunX509</algorithm>
 						<key-store>
-							<url system-property="identity.manager">file:/Users/gniu/Workspaces/ProjectStuff/FederatedCachingDemo/ssl/keystore.jks</url>
+							<url system-property="identity.manager">file:/Users/gniu/Workspaces/coh-federated-demo/ssl/keystore.jks</url>
 							<password>123456</password>
 							<type>JKS</type>
 						</key-store>
@@ -38,7 +38,7 @@
 					<trust-manager>
 						<algorithm>SunX509</algorithm>
 						<key-store>
-							<url>file:/Users/gniu/Workspaces/ProjectStuff/FederatedCachingDemo/ssl/keystore.jks</url>
+							<url>file:/Users/gniu/Workspaces/coh-federated-demo/ssl/keystore.jks</url>
 							<password>123456</password>
 							<type>JKS</type>
 						</key-store>

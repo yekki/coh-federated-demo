@@ -21,7 +21,7 @@
 				<identity-manager>
 					<algorithm>SunX509</algorithm>
 					<key-store>
-						<url system-property="identity.manager">file:/Users/gniu/Workspaces/ProjectStuff/FederatedCachingDemo/ssl/keystore.jks</url>
+						<url system-property="identity.manager">file:/Users/gniu/Workspaces/coh-federated-demo/ssl/keystore.jks</url>
 						<password>123456</password>
 						<type>JKS</type>
 					</key-store>
@@ -30,7 +30,7 @@
 				<trust-manager>
 					<algorithm>SunX509</algorithm>
 					<key-store>
-						<url>file:/Users/gniu/Workspaces/ProjectStuff/FederatedCachingDemo/ssl/keystore.jks</url>
+						<url>file:/Users/gniu/Workspaces/coh-federated-demo/ssl/keystore.jks</url>
 						<password>123456</password>
 						<type>JKS</type>
 					</key-store>
