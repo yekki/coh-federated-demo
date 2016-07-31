@@ -13,13 +13,6 @@ public class EmpComittingRemoteEventsInterceptor extends AbstractFederatedInterc
 		super();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.tangosol.coherence.federation.events.AbstractFederatedInterceptor#
-	 * getChangeRecordUpdater()
-	 */
 	@Override
 	public ChangeRecordUpdater<String, Employee> getChangeRecordUpdater() {
 		return new ChangeRecordUpdater<String, Employee>() {

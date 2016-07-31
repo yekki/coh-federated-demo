@@ -1,9 +1,3 @@
-/***************************************************************************
- *
- * PoC code for evaluating purpose only. No guarantee of quality.
- *
- ***************************************************************************/
-
 package com.oracle.poc.coherence.loadbalancer;
 
 import java.util.Comparator;
@@ -11,25 +5,6 @@ import java.util.Comparator;
 import com.tangosol.net.Member;
 import com.tangosol.net.proxy.DefaultProxyServiceLoadBalancer;
 
-/***************************************************************************
- * <PRE>
- *  Project Name    : FederatedCachingDemo
- * 
- *  Package Name    : com.oracle.poc.coherence.loadbalancer
- * 
- *  File Name       : MyProxyServiceLoadBalancer.java
- * 
- *  Creation Date   : 2016Äê7ÔÂ11ÈÕ
- * 
- *  Author          : Hysun He
- * 
- *  Purpose         : TODO
- * 
- * 
- *  History         : TODO
- * 
- * </PRE>
- ***************************************************************************/
 public class MyProxyServiceLoadBalancer extends DefaultProxyServiceLoadBalancer {
 	// private static final String CLUSTER_A = "ClusterA";
 	private static final String CLUSTER_B = "ClusterB";

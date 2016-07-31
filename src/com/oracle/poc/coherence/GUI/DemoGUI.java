@@ -24,10 +24,6 @@ import com.tangosol.net.Cluster;
 import com.tangosol.net.NamedCache;
 import com.tangosol.util.UUID;
 
-/**
- * Driver to display a GUI to exercise the Coherence Federated Cache examples or
- * to run CohQL to allow manual updating of cache contents.
- */
 public class DemoGUI {
 
 	public static void main(String[] asArgs) throws Exception {
@@ -188,13 +184,6 @@ public class DemoGUI {
 		return textField;
 	}
 
-	/**
-	 * Set System Properties to ensure the example connects to the correct
-	 * cluster.
-	 *
-	 * @param sCluster
-	 *            the cluster to connect to
-	 */
 	private static void setProperties(String sCluster) {
 		// set the cluster name
 		System.setProperty("coherence.cluster", sCluster);
@@ -206,14 +195,6 @@ public class DemoGUI {
 		}
 	}
 
-	/**
-	 * Insert the specified number of entries into the cache.
-	 *
-	 * @param cache
-	 *            the cache to insert data into
-	 * @param cEntries
-	 *            the number of entries to insert
-	 */
 	private static void insertData(NamedCache<String, Employee> cache, int cEntries) {
 		final int BATCH = 1000;
 		final int size = cache.size();
