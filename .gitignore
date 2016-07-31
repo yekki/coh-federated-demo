@@ -1,1 +1,4 @@
-/com/
+.DS_Store
+!.gitignore
+/classes
+/snapshot-archivers
